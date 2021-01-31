@@ -19,7 +19,7 @@ public enum KeyMatch
 
 public extension KeyMatch
 {
-	public func matches(_ key: String) -> Bool {
+	func matches(_ key: String) -> Bool {
 		switch self {
 		case .Exact(let pattern):
 			return pattern == key
@@ -31,7 +31,7 @@ public extension KeyMatch
 			return key.contains(pattern)
 		case .RegEx(let pattern):
 			let regex = try! NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
-			let matchRange = regex.rangeOfFirstMatch(in: key, options: [], range: NSMakeRange(0, key.characters.count))
+			let matchRange = regex.rangeOfFirstMatch(in: key, options: [], range: NSMakeRange(0, key.count))
 			return matchRange.location != NSNotFound
 		}
 	}
